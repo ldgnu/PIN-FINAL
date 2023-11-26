@@ -11,10 +11,10 @@ unzip awscliv2.zip
 sudo ./aws/install
 
 echo "Installing kubectl"
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-sudo chmod +x ./kubectl
-mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+
+curl -LO "https://dl.k8s.io/release/v1.23.0/bin/darwin/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
 kubectl version --client
 
 echo "Installing ekctl"
@@ -34,9 +34,9 @@ eksctl version
 # docker --version
 
 echo "Installing Helm"
-sudo curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-sudo chmod 700 get_helm.sh
-sudo bash get_helm.sh
+wget https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz
+tar xvf helm-v3.8.0-linux-amd64.tar.gz
+sudo mv linux-amd64/helm /usr/local/bin
 helm version
 
 echo "Installing terraform "
